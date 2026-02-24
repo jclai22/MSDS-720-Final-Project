@@ -98,7 +98,10 @@ df = load_and_clean_data("data/raw/Spotify_data.xlsx")
 │   └── cleaned/              # Cleaned, analysis-ready CSV
 ├── notebooks/
 │   └── 01_eda.ipynb          # Exploratory data analysis
-├── references/               # Literature and reference PDFs
+├── paper/
+│   ├── literature_review.tex  # LaTeX literature review (Overleaf-ready)
+│   └── references.bib         # BibTeX bibliography
+├── references/                # Literature and reference PDFs
 ├── src/
 │   ├── __init__.py
 │   ├── data_loader.py        # Data loading, cleaning, feature engineering
