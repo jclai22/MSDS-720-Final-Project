@@ -28,5 +28,9 @@ env/
 .DS_Store
 Thumbs.db
 
-# Environment variables
+# Raw data (downloaded via Kaggle API)
+data/raw/
+
+# Credentials and environment variables
 .env
+kaggle.json

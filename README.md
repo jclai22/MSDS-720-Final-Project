@@ -46,10 +46,9 @@ pip install -r requirements.txt
 ## Quick Start
 
 ```python
-import pandas as pd
 from src.data_loader import load_and_clean_data
 
-df = load_and_clean_data("data/spotify_clean_v1.csv")
+df = load_and_clean_data("data/raw/Spotify_data.xlsx")
 ```
 
 ## Tech Stack
@@ -67,11 +66,19 @@ df = load_and_clean_data("data/spotify_clean_v1.csv")
 ## Project Structure
 
 ```
-├── LICENSE
-├── README.md
+├── data/
+│   ├── raw/                  # Original dataset (not tracked)
+│   └── cleaned/              # Cleaned, analysis-ready CSV
+├── notebooks/
+│   └── 01_eda.ipynb          # Exploratory data analysis
+├── references/               # Literature and reference PDFs
+├── src/
+│   ├── __init__.py
+│   ├── data_loader.py        # Data loading, cleaning, feature engineering
+│   └── eda.py                # Reusable EDA plotting functions
 ├── .gitignore
-├── Reference Materials (PDFs)
-└── (analysis scripts and notebooks coming soon)
+├── LICENSE
+└── README.md
 ```
 
 ## Group Members
