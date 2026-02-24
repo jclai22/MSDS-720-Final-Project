@@ -11,17 +11,18 @@ This project analyzes Spotify user behavior data to distinguish bot-like account
 
 ### Research Questions
 
-**RQ1 (Logistic Regression):** Which behavioral features predict whether a Spotify account is bot-like or human?
+**RQ1 (Logistic Regression):** Among Spotify users, which behavioral features -- specifically skip rate, listening diversity, listening time, and genre preference -- significantly predict the likelihood that an account exhibits bot-like behavior?
 
-**RQ2 (Multiple Regression + Interaction):** Does bot-like behavior inflate total stream counts, and does the effect of listening time on streams differ between bot-like and human users?
+**RQ2 (Multiple Regression + Interaction):** After controlling for user demographics and listening behavior, do accounts classified as bot-like show significantly higher stream counts than human accounts, and does bot-like status moderate the relationship between listening time and total streams?
 
 ### Hypotheses
 
-| # | Hypothesis | Expected Direction |
-|---|---|---|
-| H1 | Skip rate, diversity score, and repetitive listening predict bot classification | Higher skip rate, lower diversity → bot-like |
-| H2 | Bot-like accounts have higher stream counts | Bot > Human |
-| H2a | Listening time effect on streams differs by account type | Stronger effect for bot-like accounts |
+| # | Hypothesis |
+|---|---|
+| H1a | Higher skip rates are positively associated with the probability of bot-like classification (OR > 1, p < .05) |
+| H1b | Lower listening diversity scores are positively associated with the probability of bot-like classification (OR < 1, p < .05) |
+| H2 | Bot-like accounts will have significantly higher mean stream counts than human accounts, controlling for listening time and age (beta > 0, p < .05) |
+| H2a | There is a significant positive interaction between listening time and bot-like status on stream counts, such that the marginal effect of listening time on streams is greater for bot-like accounts than for human users (beta_interaction > 0, p < .05) |
 
 ## Dataset
 
