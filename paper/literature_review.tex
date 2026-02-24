@@ -46,6 +46,26 @@ The problem extends beyond financial fraud. When bot-generated streams are mixed
 
 This literature review examines three intersecting bodies of work: (1) bot detection and classification methods from the social media and cybersecurity literature, (2) studies of streaming fraud and its impact on the music industry, and (3) statistical and machine learning approaches to modeling music popularity and user behavior on Spotify. We conclude by identifying the gap our study addresses and outlining how logistic regression, multiple regression, and interaction models can contribute to this space.
 
+\subsection{Research Questions}
+
+We pose two research questions:
+
+\begin{itemize}
+\item \textbf{RQ1 (Logistic Regression):} Among Spotify users, which behavioral features---specifically skip rate, listening diversity, listening time, and genre preference---significantly predict the likelihood that an account exhibits bot-like behavior?
+\item \textbf{RQ2 (Multiple Regression + Interaction):} After controlling for user demographics and listening behavior, do accounts classified as bot-like show significantly higher stream counts than human accounts, and does bot-like status moderate the relationship between listening time and total streams?
+\end{itemize}
+
+\subsection{Hypotheses}
+
+Based on the literature reviewed below, we state the following directional hypotheses:
+
+\begin{itemize}
+\item \textbf{H1a:} Higher skip rates are positively associated with the probability of bot-like classification (OR $> 1$, $p < .05$).
+\item \textbf{H1b:} Lower listening diversity scores are positively associated with the probability of bot-like classification (OR $< 1$, $p < .05$).
+\item \textbf{H2:} Bot-like accounts will have significantly higher mean stream counts than human accounts, controlling for listening time and age ($\beta > 0$, $p < .05$).
+\item \textbf{H2a:} There is a significant positive interaction between listening time and bot-like status on stream counts, such that the marginal effect of listening time on streams is greater for bot-like accounts than for human users ($\beta_{\text{interaction}} > 0$, $p < .05$).
+\end{itemize}
+
 \section{Bot Detection and Automated Account Classification}
 
 Research on detecting automated accounts has been most active in the social media domain, particularly on platforms like Twitter (now X), Facebook, and Reddit. Ng and Carley conducted a large-scale analysis across approximately 200 million social media users spanning seven global events and found that roughly 20\% of the observed chatter originated from bots \cite{ng2024global}. Their analysis identified consistent behavioral differences between bots and humans: bots relied on linguistic cues that lend themselves to automation, such as increased hashtag usage and positive sentiment terms, while human users employed communication patterns that required genuine dialogue understanding, such as contextual replies within threaded conversations.
