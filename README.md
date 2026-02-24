@@ -1,18 +1,27 @@
 # MSDS 720 Final Project – Spotify Bot vs. Human Analysis
 
-This repository contains the code, data, and reference materials for our final project in **MSDS 720 Advanced Statistics** at Meharry Medical College.
+> Detecting bot-like behavior in Spotify user data using logistic regression, multiple regression, and interaction modeling
 
-## Research Questions
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+
+## Overview
+
+This project analyzes Spotify user behavior data to distinguish bot-like accounts from human users. Using a combination of regression techniques and engineered features (skip rate, diversity score), we investigate which behavioral signals predict bot classification and whether bot-like accounts artificially inflate stream counts.
+
+### Research Questions
 
 **RQ1 (Logistic Regression):** Which behavioral features predict whether a Spotify account is bot-like or human?
 
 **RQ2 (Multiple Regression + Interaction):** Does bot-like behavior inflate total stream counts, and does the effect of listening time on streams differ between bot-like and human users?
 
-## Hypotheses
+### Hypotheses
 
-- **H1:** Accounts with higher skip rates, lower diversity scores, and more repetitive listening patterns will be more likely classified as bot-like.
-- **H2:** Bot-like accounts will have significantly higher stream counts than human accounts.
-- **H2a (Interaction):** The positive effect of listening time on streams will be stronger for bot-like accounts than for human users.
+| # | Hypothesis | Expected Direction |
+|---|---|---|
+| H1 | Skip rate, diversity score, and repetitive listening predict bot classification | Higher skip rate, lower diversity → bot-like |
+| H2 | Bot-like accounts have higher stream counts | Bot > Human |
+| H2a | Listening time effect on streams differs by account type | Stronger effect for bot-like accounts |
 
 ## Dataset
 
@@ -27,6 +36,21 @@ This repository contains the code, data, and reference materials for our final p
 | Logistic Regression / GLM | Predict bot-like accounts; odds ratios + 95% CI |
 | Interaction Effects | `listening_time x bot_like`; interaction plots |
 | Model Selection | AIC/BIC comparison across candidate models |
+
+## Installation
+
+```bash
+pip install -r requirements.txt
+```
+
+## Quick Start
+
+```python
+import pandas as pd
+from src.data_loader import load_and_clean_data
+
+df = load_and_clean_data("data/spotify_clean_v1.csv")
+```
 
 ## Tech Stack
 
@@ -57,4 +81,4 @@ This repository contains the code, data, and reference materials for our final p
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+MIT - See [LICENSE](LICENSE) for details.
