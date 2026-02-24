@@ -1,29 +1,32 @@
-\documentclass[12pt, a4paper]{article}
+\documentclass[conference]{IEEEtran}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{times}
-\usepackage[margin=1in]{geometry}
-\usepackage{setspace}
-\usepackage{natbib}
-\usepackage{hyperref}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
 \usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{url}
 
-\doublespacing
+\begin{document}
 
 \title{SpotBot: Detecting Bot-Like Behavior in Spotify User Data}
 
 \author{
-Jaclyn Claiborne\textsuperscript{1} \and Tenicka Norwood\textsuperscript{1} \\[6pt]
-\textsuperscript{1}School of Applied Computational Sciences, Meharry Medical College \\
-Nashville, TN 37208, USA \\
-\texttt{jaclyn.claiborne@mmc.edu} \\
-\texttt{tenicka.norwood@mmc.edu}
+\IEEEauthorblockN{Jaclyn Claiborne}
+\IEEEauthorblockA{School of Applied Computational Sciences\\
+Meharry Medical College\\
+Nashville, TN 37208, USA\\
+jaclyn.claiborne@mmc.edu}
+\and
+\IEEEauthorblockN{Tenicka Norwood}
+\IEEEauthorblockA{School of Applied Computational Sciences\\
+Meharry Medical College\\
+Nashville, TN 37208, USA\\
+tenicka.norwood@mmc.edu}
 }
-
-\date{}
-
-\begin{document}
 
 \maketitle
 
@@ -31,55 +34,59 @@ Nashville, TN 37208, USA \\
 Music streaming platforms have reshaped how listeners discover, consume, and interact with recorded music. As these platforms have grown, so too has the prevalence of automated accounts and artificial streaming, raising concerns about data integrity and fair compensation for artists. This review surveys the current literature on bot detection methods, streaming fraud, user behavior modeling, and music popularity prediction. We identify a gap at the intersection of classical regression techniques and streaming platform analytics, motivating our study of bot-like behavior in Spotify user data through logistic regression, multiple regression, and interaction modeling.
 \end{abstract}
 
+\begin{IEEEkeywords}
+bot detection, streaming fraud, Spotify, logistic regression, user behavior analysis
+\end{IEEEkeywords}
+
 \section{Introduction}
 
-Over the past decade, music streaming services have become the dominant channel through which listeners access recorded music. Spotify alone reported over 600 million active users by 2024, generating billions of individual streams per day. This scale of activity, while commercially significant, has also created opportunities for manipulation. Automated accounts, streaming farms, and coordinated playback schemes now represent a measurable share of total platform activity, distorting royalty distributions and undermining the reliability of behavioral data \citep{safewise2024, wired_onemanbot2024}.
+Over the past decade, music streaming services have become the dominant channel through which listeners access recorded music. Spotify alone reported over 600 million active users by 2024, generating billions of individual streams per day. This scale of activity, while commercially significant, has also created opportunities for manipulation. Automated accounts, streaming farms, and coordinated playback schemes now represent a measurable share of total platform activity, distorting royalty distributions and undermining the reliability of behavioral data \cite{safewise2024, wired_onemanbot2024}.
 
-The problem extends beyond financial fraud. When bot-generated streams are mixed with organic listening data, any downstream analysis of user behavior risks conflating artificial patterns with genuine preferences. For researchers studying music consumption, engagement, or popularity, this contamination introduces systematic bias that is difficult to detect without targeted methods \citep{mokoena2025ai}.
+The problem extends beyond financial fraud. When bot-generated streams are mixed with organic listening data, any downstream analysis of user behavior risks conflating artificial patterns with genuine preferences. For researchers studying music consumption, engagement, or popularity, this contamination introduces systematic bias that is difficult to detect without targeted methods \cite{mokoena2025ai}.
 
 This literature review examines three intersecting bodies of work: (1) bot detection and classification methods from the social media and cybersecurity literature, (2) studies of streaming fraud and its impact on the music industry, and (3) statistical and machine learning approaches to modeling music popularity and user behavior on Spotify. We conclude by identifying the gap our study addresses and outlining how logistic regression, multiple regression, and interaction models can contribute to this space.
 
 \section{Bot Detection and Automated Account Classification}
 
-Research on detecting automated accounts has been most active in the social media domain, particularly on platforms like Twitter (now X), Facebook, and Reddit. Ng and Carley conducted a large-scale analysis across approximately 200 million social media users spanning seven global events and found that roughly 20\% of the observed chatter originated from bots \citep{ng2024global}. Their analysis identified consistent behavioral differences between bots and humans: bots relied on linguistic cues that lend themselves to automation, such as increased hashtag usage and positive sentiment terms, while human users employed communication patterns that required genuine dialogue understanding, such as contextual replies within threaded conversations.
+Research on detecting automated accounts has been most active in the social media domain, particularly on platforms like Twitter (now X), Facebook, and Reddit. Ng and Carley conducted a large-scale analysis across approximately 200 million social media users spanning seven global events and found that roughly 20\% of the observed chatter originated from bots \cite{ng2024global}. Their analysis identified consistent behavioral differences between bots and humans: bots relied on linguistic cues that lend themselves to automation, such as increased hashtag usage and positive sentiment terms, while human users employed communication patterns that required genuine dialogue understanding, such as contextual replies within threaded conversations.
 
-Several comprehensive reviews have catalogued the range of detection methods available. Aljabri et al. surveyed 105 studies on machine learning techniques for bot detection and organized them into graph-based, ML-based, crowdsourcing, and anomaly-based categories \citep{aljabri2023mlbot}. Their review found that Random Forest and Support Vector Machine classifiers were the most commonly employed, while unsupervised methods remained underexplored. Similarly, Ellaky et al. proposed a taxonomy of detection approaches spanning ML-based, deep learning-based, graph-based, and hybrid methods, and classified bots into subtypes including sybils, cyborgs, spam bots, and political bots \citep{ellaky2023systematic}.
+Several comprehensive reviews have catalogued the range of detection methods available. Aljabri et al. surveyed 105 studies on machine learning techniques for bot detection and organized them into graph-based, ML-based, crowdsourcing, and anomaly-based categories \cite{aljabri2023mlbot}. Their review found that Random Forest and Support Vector Machine classifiers were the most commonly employed, while unsupervised methods remained underexplored. Similarly, Ellaky et al. proposed a taxonomy of detection approaches spanning ML-based, deep learning-based, graph-based, and hybrid methods, and classified bots into subtypes including sybils, cyborgs, spam bots, and political bots \cite{ellaky2023systematic}.
 
-One methodological approach with direct relevance to our study is the use of logistic regression as a base classifier. Chalichalamala et al. developed a Logistic Regression-based Ensemble Classifier (LREC) that combined AdaBoost and Random Forest for intrusion detection in IoT systems \citep{chalichalamala2023lrec}. Their framework demonstrated that logistic regression, when augmented through ensemble methods, could achieve competitive classification performance even on imbalanced datasets, a finding that is directly applicable to streaming bot detection, where fraudulent accounts typically represent a minority class.
+One methodological approach with direct relevance to our study is the use of logistic regression as a base classifier. Chalichalamala et al. developed a Logistic Regression-based Ensemble Classifier (LREC) that combined AdaBoost and Random Forest for intrusion detection in IoT systems \cite{chalichalamala2023lrec}. Their framework demonstrated that logistic regression, when augmented through ensemble methods, could achieve competitive classification performance even on imbalanced datasets, a finding that is directly applicable to streaming bot detection, where fraudulent accounts typically represent a minority class.
 
-What these studies share is a reliance on behavioral features rather than content-level analysis for classification. Features such as posting frequency, interaction patterns, account age, and engagement consistency have proven more robust than text-based detection alone \citep{aljabri2023mlbot}. This principle informs our approach: rather than analyzing audio content or playlist composition, we engineer behavioral proxy variables from user survey data to identify accounts that exhibit bot-like patterns.
+What these studies share is a reliance on behavioral features rather than content-level analysis for classification. Features such as posting frequency, interaction patterns, account age, and engagement consistency have proven more robust than text-based detection alone \cite{aljabri2023mlbot}. This principle informs our approach: rather than analyzing audio content or playlist composition, we engineer behavioral proxy variables from user survey data to identify accounts that exhibit bot-like patterns.
 
 \section{Streaming Fraud and the Music Industry}
 
-The financial incentives for streaming fraud are substantial. On platforms that distribute royalties on a per-stream basis, even modest artificial inflation of play counts can translate into meaningful revenue. Journalistic investigations have documented cases at both small and industrial scales. A WIRED investigation profiled a single operator who used an army of streaming bots to inflate play counts across multiple platforms, revealing the accessibility and low technical barrier to entry for this type of fraud \citep{wired_onemanbot2024}. A separate WIRED report examined a case involving over one billion artificially generated streams tied to AI-produced music, resulting in a \$10 million fraud scheme that exploited the difficulty platforms face in distinguishing genuine from synthetic listening activity \citep{wired_billionstreamfraud2024}.
+The financial incentives for streaming fraud are substantial. On platforms that distribute royalties on a per-stream basis, even modest artificial inflation of play counts can translate into meaningful revenue. Journalistic investigations have documented cases at both small and industrial scales. A WIRED investigation profiled a single operator who used an army of streaming bots to inflate play counts across multiple platforms, revealing the accessibility and low technical barrier to entry for this type of fraud \cite{wired_onemanbot2024}. A separate WIRED report examined a case involving over one billion artificially generated streams tied to AI-produced music, resulting in a \$10 million fraud scheme that exploited the difficulty platforms face in distinguishing genuine from synthetic listening activity \cite{wired_billionstreamfraud2024}.
 
-The rise of AI-generated music has compounded the problem. As generative models have become capable of producing passable recordings at scale, the economics of streaming fraud have shifted. Rather than simply replaying existing tracks, bad actors can now generate novel content and pair it with automated playback, making detection harder because the content itself appears original \citep{aigenstreaming2024}. SafeWise documented the broader landscape of music streaming fraud, categorizing it into bot-driven playback, click farms, playlist manipulation, and coordinated streaming rings, and noted that platforms have struggled to develop detection methods that keep pace with the evolving tactics \citep{safewise2024}.
+The rise of AI-generated music has compounded the problem. As generative models have become capable of producing passable recordings at scale, the economics of streaming fraud have shifted. Rather than simply replaying existing tracks, bad actors can now generate novel content and pair it with automated playback, making detection harder because the content itself appears original \cite{aigenstreaming2024}. SafeWise documented the broader landscape of music streaming fraud, categorizing it into bot-driven playback, click farms, playlist manipulation, and coordinated streaming rings, and noted that platforms have struggled to develop detection methods that keep pace with the evolving tactics \cite{safewise2024}.
 
-The implications extend beyond individual artists. Mokoena and Obagbuwa reviewed the role of AI automation across digital music streaming platforms and found that while recommendation algorithms and dynamic pricing models drive legitimate engagement, the same infrastructure can be exploited by automated agents that mimic human subscription and listening behaviors \citep{mokoena2025ai}. This duality, where the features designed to personalize human experiences are simultaneously the features most susceptible to automated exploitation, motivates research into behavioral signatures that reliably distinguish the two.
+The implications extend beyond individual artists. Mokoena and Obagbuwa reviewed the role of AI automation across digital music streaming platforms and found that while recommendation algorithms and dynamic pricing models drive legitimate engagement, the same infrastructure can be exploited by automated agents that mimic human subscription and listening behaviors \cite{mokoena2025ai}. This duality, where the features designed to personalize human experiences are simultaneously the features most susceptible to automated exploitation, motivates research into behavioral signatures that reliably distinguish the two.
 
 \section{User Behavior and the Psychology of Music Streaming}
 
-Understanding what constitutes ``normal'' human listening behavior is a prerequisite for identifying anomalies. Two complementary analyses of Spotify Wrapped, the platform's annual personalized listening summary, offer insight into the behavioral patterns of genuine users. The Decision Lab examined the behavioral science principles underlying Wrapped's success, highlighting how features like social comparison, nostalgia, and identity expression drive engagement among real users \citep{tdl_wrapped2024}. Irrational Labs extended this analysis by documenting the specific cognitive biases, including the endowment effect and commitment bias, that Wrapped exploits to deepen user attachment to the platform \citep{irrational_wrapped2024}.
+Understanding what constitutes ``normal'' human listening behavior is a prerequisite for identifying anomalies. Two complementary analyses of Spotify Wrapped, the platform's annual personalized listening summary, offer insight into the behavioral patterns of genuine users. The Decision Lab examined the behavioral science principles underlying Wrapped's success, highlighting how features like social comparison, nostalgia, and identity expression drive engagement among real users \cite{tdl_wrapped2024}. Irrational Labs extended this analysis by documenting the specific cognitive biases, including the endowment effect and commitment bias, that Wrapped exploits to deepen user attachment to the platform \cite{irrational_wrapped2024}.
 
 These findings have methodological implications for bot detection. Human listeners tend to exhibit variable, context-dependent listening patterns shaped by mood, social setting, and time of day. Bot accounts, by contrast, tend toward repetitive, invariant patterns optimized for stream count accumulation rather than genuine engagement. The contrast between these behavioral profiles suggests that features capturing listening variability, such as diversity scores and skip rates, may serve as useful discriminators, a hypothesis we test directly in our analysis.
 
 \section{Music Popularity Prediction and Spotify Feature Analysis}
 
-A parallel body of work has focused on predicting the popularity of individual tracks using features extracted from the Spotify API. Jiang applied three machine learning models, including Random Forest Regressor, Simple Linear Regression, and Gradient Boosting Machines, to a dataset of 114,000 songs and found that Random Forest best captured the nonlinear relationships between audio features and popularity \citep{jiang2024predicting}. Falah et al. extended this line of work by applying Convolutional Neural Networks to both Spotify metadata and spectrogram representations of audio waveforms, demonstrating that combining content-level and metadata features improved prediction accuracy \citep{falah2025cnn}.
+A parallel body of work has focused on predicting the popularity of individual tracks using features extracted from the Spotify API. Jiang applied three machine learning models, including Random Forest Regressor, Simple Linear Regression, and Gradient Boosting Machines, to a dataset of 114,000 songs and found that Random Forest best captured the nonlinear relationships between audio features and popularity \cite{jiang2024predicting}. Falah et al. extended this line of work by applying Convolutional Neural Networks to both Spotify metadata and spectrogram representations of audio waveforms, demonstrating that combining content-level and metadata features improved prediction accuracy \cite{falah2025cnn}.
 
-Sciandra and Spera took a statistical modeling approach more closely aligned with our own methodology. They proposed a Beta Generalized Linear Mixed Model (GLMM) to analyze Spotify popularity scores, accounting for the bounded nature of the outcome variable and incorporating random effects to capture song-level heterogeneity \citep{sciandra2022beta}. Their work demonstrates that classical statistical models, when properly specified, can provide interpretable insights that complement the predictive power of more complex machine learning pipelines.
+Sciandra and Spera took a statistical modeling approach more closely aligned with our own methodology. They proposed a Beta Generalized Linear Mixed Model (GLMM) to analyze Spotify popularity scores, accounting for the bounded nature of the outcome variable and incorporating random effects to capture song-level heterogeneity \cite{sciandra2022beta}. Their work demonstrates that classical statistical models, when properly specified, can provide interpretable insights that complement the predictive power of more complex machine learning pipelines.
 
-Gulmatico et al. similarly applied Linear Regression, Random Forest, Decision Tree, and K-Means Clustering to classify songs as popular or non-popular based on audio attributes, finding that ensemble methods outperformed simpler models \citep{gulmatico2022spotipred}. Across these studies, audio features such as danceability, energy, and tempo consistently emerge as predictive, but the models address a different question from ours: they predict what makes a song popular, whereas we investigate what makes a user suspicious.
+Gulmatico et al. similarly applied Linear Regression, Random Forest, Decision Tree, and K-Means Clustering to classify songs as popular or non-popular based on audio attributes, finding that ensemble methods outperformed simpler models \cite{gulmatico2022spotipred}. Across these studies, audio features such as danceability, energy, and tempo consistently emerge as predictive, but the models address a different question from ours: they predict what makes a song popular, whereas we investigate what makes a user suspicious.
 
 \section{Click Fraud and Cross-Domain Detection Methods}
 
-The challenge of distinguishing automated from human activity is not unique to music streaming. Aljabri and Mohammad examined click fraud detection in online advertising using machine learning and found that behavioral features, including session duration, number of pages viewed, and browsing patterns, were the strongest predictors of bot-like activity \citep{aljabri2023clickfraud}. Random Forest outperformed Logistic Regression, SVM, and Decision Tree classifiers across all evaluation metrics in their study. The feature engineering strategy they employed, constructing behavioral proxy variables from aggregated user activity data, is directly transferable to the streaming context and informs our own approach to engineering skip rate and diversity score from categorical survey responses.
+The challenge of distinguishing automated from human activity is not unique to music streaming. Aljabri and Mohammad examined click fraud detection in online advertising using machine learning and found that behavioral features, including session duration, number of pages viewed, and browsing patterns, were the strongest predictors of bot-like activity \cite{aljabri2023clickfraud}. Random Forest outperformed Logistic Regression, SVM, and Decision Tree classifiers across all evaluation metrics in their study. The feature engineering strategy they employed, constructing behavioral proxy variables from aggregated user activity data, is directly transferable to the streaming context and informs our own approach to engineering skip rate and diversity score from categorical survey responses.
 
-Liu et al. conducted a systematic review of machine learning approaches for detecting deceptive activity on social media and identified important methodological concerns, including selection bias from non-representative sampling, inconsistent hyperparameter tuning, and inadequate handling of class imbalance \citep{liu2025deceptive}. These cautions are relevant to any bot detection study and inform our attention to class balance diagnostics and model comparison via AIC and BIC.
+Liu et al. conducted a systematic review of machine learning approaches for detecting deceptive activity on social media and identified important methodological concerns, including selection bias from non-representative sampling, inconsistent hyperparameter tuning, and inadequate handling of class imbalance \cite{liu2025deceptive}. These cautions are relevant to any bot detection study and inform our attention to class balance diagnostics and model comparison via AIC and BIC.
 
 \section{Fairness and Algorithmic Implications}
 
-The stakes of bot detection extend beyond fraud prevention into questions of fairness and equitable compensation. Henry et al. examined how AI-based recommendation algorithms affect fairness in music consumption and found that continuous deployment of machine learning systems relying on user feedback creates popularity bias, making visible only those creators with the most listens \citep{henry2024fairness}. When artificial streams inflate the visibility of certain tracks, the resulting algorithmic amplification compounds the initial distortion, disadvantaging artists who rely on organic engagement. This provides policy context for why accurate bot detection matters not only for platform integrity but also for the broader music ecosystem.
+The stakes of bot detection extend beyond fraud prevention into questions of fairness and equitable compensation. Henry et al. examined how AI-based recommendation algorithms affect fairness in music consumption and found that continuous deployment of machine learning systems relying on user feedback creates popularity bias, making visible only those creators with the most listens \cite{henry2024fairness}. When artificial streams inflate the visibility of certain tracks, the resulting algorithmic amplification compounds the initial distortion, disadvantaging artists who rely on organic engagement. This provides policy context for why accurate bot detection matters not only for platform integrity but also for the broader music ecosystem.
 
 \section{Identified Gap and Study Motivation}
 
@@ -87,7 +94,7 @@ The literature reviewed above reveals a well-developed set of tools for bot dete
 
 Our study bridges this gap by applying logistic regression, multiple linear regression, and interaction models to Spotify user behavior data. We use logistic regression to identify which behavioral features predict the likelihood of bot-like classification, multiple regression to test whether bot-like accounts exhibit inflated stream counts after controlling for demographics and listening behavior, and an interaction model to examine whether the relationship between listening time and streams is moderated by bot-like status. This combination of methods, while less computationally intensive than deep learning approaches, offers interpretability and statistical rigor that are well suited to the exploratory stage of this research question.
 
-\bibliographystyle{apalike}
+\bibliographystyle{IEEEtran}
 \bibliography{references}
 
 \end{document}
