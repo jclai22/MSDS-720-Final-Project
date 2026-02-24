@@ -13,11 +13,11 @@ from dotenv import load_dotenv
 # Ordinal mappings for engineering continuous proxies
 
 AGE_MIDPOINTS = {
-    "6-12": 9,
-    "12-20": 16,
-    "20-35": 27,
-    "35-60": 47,
-    "60+": 65,
+    "6-12": 9,       # [6, 12]
+    "12-20": 16,     # [13, 20]
+    "20-35": 28,     # [21, 35]
+    "35-60": 48,     # [36, 60]
+    "60+": 70,       # [61, 80] assumed upper bound
 }
 
 USAGE_PERIOD_MONTHS = {

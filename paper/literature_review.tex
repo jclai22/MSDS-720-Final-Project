@@ -9,6 +9,7 @@
 \usepackage{xcolor}
 \usepackage{hyperref}
 \usepackage{url}
+\usepackage{booktabs}
 
 \begin{document}
 
@@ -51,7 +52,7 @@ This literature review examines three intersecting bodies of work: (1) bot detec
 We pose two research questions:
 
 \begin{itemize}
-\item \textbf{RQ1 (Logistic Regression):} Among Spotify users, which behavioral features---specifically skip rate, listening diversity, listening time, and genre preference---significantly predict the likelihood that an account exhibits bot-like behavior?
+\item \textbf{RQ1 (Logistic Regression):} Among Spotify users, which behavioral features (specifically skip rate, listening diversity, listening time, and genre preference) significantly predict the likelihood that an account exhibits bot-like behavior?
 \item \textbf{RQ2 (Multiple Regression + Interaction):} After controlling for user demographics and listening behavior, do accounts classified as bot-like show significantly higher stream counts than human accounts, and does bot-like status moderate the relationship between listening time and total streams?
 \end{itemize}
 
@@ -65,6 +66,36 @@ Based on the literature reviewed below, we state the following directional hypot
 \item \textbf{H2:} Bot-like accounts will have significantly higher mean stream counts than human accounts, controlling for listening time and age ($\beta > 0$, $p < .05$).
 \item \textbf{H2a:} There is a significant positive interaction between listening time and bot-like status on stream counts, such that the marginal effect of listening time on streams is greater for bot-like accounts than for human users ($\beta_{\text{interaction}} > 0$, $p < .05$).
 \end{itemize}
+
+\subsection{Notation}
+
+Table~\ref{tab:notation} summarizes the symbols and abbreviations used throughout this paper.
+
+\begin{table}[h]
+\centering
+\caption{Symbols and Abbreviations}
+\label{tab:notation}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Symbol} & \textbf{Definition} \\
+\midrule
+$\beta$ & Regression coefficient (unstandardized) \\
+$\beta_{\text{interaction}}$ & Coefficient for the interaction term \\
+OR & Odds ratio \\
+CI & Confidence interval \\
+$p$ & $p$-value (probability under the null hypothesis) \\
+VIF & Variance inflation factor \\
+AIC & Akaike information criterion \\
+BIC & Bayesian information criterion \\
+$n$ & Sample size \\
+$R^2$ & Coefficient of determination \\
+$\hat{y}$ & Predicted value of the outcome variable \\
+$\sigma^2$ & Residual variance \\
+HR & Hazard ratio \\
+KM & Kaplan--Meier (survival estimator) \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \section{Bot Detection and Automated Account Classification}
 
