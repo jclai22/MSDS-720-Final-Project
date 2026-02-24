@@ -38,7 +38,33 @@ This project analyzes Spotify user behavior data to distinguish bot-like account
 | Interaction Effects | `listening_time x bot_like`; interaction plots |
 | Model Selection | AIC/BIC comparison across candidate models |
 
-## Installation
+## Environment Setup
+
+### 1. Create the conda environment
+
+```bash
+conda env create -f environment.yml
+```
+
+This creates an environment called `msds720` with Python 3.11 and all required packages (pandas, numpy, scikit-learn, statsmodels, matplotlib, seaborn, etc.).
+
+### 2. Activate the environment
+
+```bash
+conda activate msds720
+```
+
+### 3. Register the Jupyter kernel
+
+```bash
+python -m ipykernel install --user --name msds720 --display-name "MSDS 720 (Python 3.11)"
+```
+
+After this step, select **MSDS 720 (Python 3.11)** as the kernel when opening notebooks in Jupyter or VS Code.
+
+### 4. Alternative: pip install
+
+If you prefer pip over conda:
 
 ```bash
 pip install -r requirements.txt
@@ -77,6 +103,8 @@ df = load_and_clean_data("data/raw/Spotify_data.xlsx")
 │   ├── __init__.py
 │   ├── data_loader.py        # Data loading, cleaning, feature engineering
 │   └── eda.py                # Reusable EDA plotting functions
+├── environment.yml           # Conda environment specification
+├── requirements.txt          # Pip requirements (alternative)
 ├── .gitignore
 ├── LICENSE
 └── README.md
