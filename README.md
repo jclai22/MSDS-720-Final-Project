@@ -33,6 +33,13 @@ This repository contains the code, data, and reference materials for our final p
 - **Language:** Python
 - **Key Libraries:** pandas, numpy, scikit-learn, statsmodels, matplotlib, seaborn
 
+## Coding Standards
+
+- **PEP 8 Compliance** — All Python code follows [PEP 8](https://peps.python.org/pep-0008/) style guidelines
+- **DRY Principle** — Don't Repeat Yourself; shared logic is extracted into reusable functions and modules
+- **Modular Design** — Code is organized into clear, single-responsibility functions
+- **Readable Code** — Descriptive variable and function names; comments only where logic isn't self-evident
+
 ## Project Structure
 
 ```
