@@ -2,7 +2,7 @@
 
 > Detecting bot-like behavior in Spotify user data using logistic regression, multiple regression, and interaction modeling
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: PolyForm Noncommercial](https://img.shields.io/badge/License-PolyForm%20Noncommercial-blue.svg)](https://polyformproject.org/licenses/noncommercial/1.0.0/)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 
 ## Overview
@@ -120,4 +120,4 @@ df = load_and_clean_data("data/raw/Spotify_data.xlsx")
 
 ## License
 
-MIT - See [LICENSE](LICENSE) for details.
+PolyForm Noncommercial 1.0.0 - See [LICENSE](LICENSE) for details.
