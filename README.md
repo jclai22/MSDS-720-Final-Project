@@ -94,20 +94,22 @@ df = load_and_clean_data("data/raw/Spotify_data.xlsx")
 
 ```
 ├── data/
-│   ├── raw/                  # Original dataset (not tracked)
-│   └── cleaned/              # Cleaned, analysis-ready CSV
+│   ├── raw/                                  # Original dataset (not tracked)
+│   └── cleaned/                              # Cleaned, analysis-ready CSV
 ├── notebooks/
-│   └── 01_eda.ipynb          # Exploratory data analysis
+│   └── 01_eda.ipynb                          # Exploratory data analysis
+|   └── 02_logistic_regression.ipynb          # Logistic Regression analysis
+|   └── 03_mulitple_regression.ipynb          # Exploratory data analysis
+|   └── 04_survival_analysis.ipynb            # Exploratory data analysis
 ├── paper/
-│   ├── literature_review.tex  # LaTeX literature review (Overleaf-ready)
-│   └── references.bib         # BibTeX bibliography
-├── references/                # Literature and reference PDFs
+│   ├── final_paper_msds_720.pdf              # Final paper (PDF)
+├── references/                               # Literature and reference PDFs
 ├── src/
 │   ├── __init__.py
-│   ├── data_loader.py        # Data loading, cleaning, feature engineering
-│   └── eda.py                # Reusable EDA plotting functions
-├── environment.yml           # Conda environment specification
-├── requirements.txt          # Pip requirements (alternative)
+│   ├── data_loader.py                        # Data loading, cleaning, feature engineering
+│   └── eda.py                                # Reusable EDA plotting functions
+├── environment.yml                           # Conda environment specification
+├── requirements.txt                          # Pip requirements (alternative)
 ├── .gitignore
 ├── LICENSE
 └── README.md
@@ -115,8 +117,8 @@ df = load_and_clean_data("data/raw/Spotify_data.xlsx")
 
 ## Group Members
 
-- **JC** – Dataset, regression, interaction effects
-- **TN** – Logistic regression, model selection, discussion
+- **Jaclyn Claiborne** – Dataset, regression, interaction effects
+- **Tenick Norwood** – Logistic regression, model selection, discussion
 
 ## License
 
