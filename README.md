@@ -96,6 +96,7 @@ df = load_and_clean_data("data/raw/Spotify_data.xlsx")
 ├── data/
 │   ├── raw/                                  # Original dataset (not tracked)
 │   └── cleaned/                              # Cleaned, analysis-ready CSV
+├── figures/                                  # images, diagrams, and snapshots 
 ├── notebooks/
 │   └── 01_eda.ipynb                          # Exploratory data analysis
 |   └── 02_logistic_regression.ipynb          # Logistic Regression analysis
