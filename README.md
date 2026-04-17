@@ -98,6 +98,7 @@ df = load_and_clean_data("data/raw/Spotify_data.xlsx")
 │   └── cleaned/                              # Cleaned, analysis-ready CSV
 ├── figures/                                  # images, diagrams, and snapshots 
 ├── notebooks/
+│   └── 00_spot_the_bot.ipynb                 # Google Colab single notebook implementation
 │   └── 01_eda.ipynb                          # Exploratory data analysis
 |   └── 02_logistic_regression.ipynb          # Logistic Regression analysis
 |   └── 03_mulitple_regression.ipynb          # Exploratory data analysis
